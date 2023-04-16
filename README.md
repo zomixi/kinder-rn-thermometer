@@ -23,7 +23,6 @@ gradlew
 gradlew.bat
 build.gradle
 gradle.properties
-local.properties
 settings.gradle
 ```
 
