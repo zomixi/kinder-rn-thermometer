@@ -1,0 +1,27 @@
+{
+  "name": "kinder-rn-thermometer",
+  "version": "1.0.0",
+  "description": "Kinder测温",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 1"
+  },
+  "keywords": [
+    "wechat",
+    "react",
+    "react-native",
+    "react-component",
+    "ios"
+  ],
+  "peerDependencies": {
+    "react-native": ">=0.40"
+  },
+  "author": "kinder",
+  "contributors": [
+    {
+      "name": "kinder",
+      "email": "kinder@huomu.com"
+    }
+  ],
+  "license": "MIT"
+}
