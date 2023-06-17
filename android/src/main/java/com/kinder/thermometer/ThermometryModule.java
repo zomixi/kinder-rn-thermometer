@@ -11,7 +11,7 @@ public class ThermometryModule extends ReactContextBaseJavaModule {
 
     private ReactApplicationContext	mReactContext;
 
-    private ThermometerRecord mThermometerRecord = null;
+    private static ThermometerRecord mThermometerRecord = null;
 
     @Override
     public String getName() {
