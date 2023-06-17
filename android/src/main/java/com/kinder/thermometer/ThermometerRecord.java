@@ -35,11 +35,14 @@ public class ThermometerRecord implements OnSerialPortDataListener {
     }
 
     public boolean start() {
+        Log.e("TAG", "===================start");
         boolean successFlag = serialPortManager.openSerialPort(new File("/dev/ttysWK0"), 9600);
+        serialPortManager.setOnSerialPortDataListener(this);
         return successFlag;
     }
 
     public boolean stop() {
+        Log.e("TAG", "===================stop");
         serialPortManager.closeSerialPort();
         return true;
     }
@@ -51,6 +54,8 @@ public class ThermometerRecord implements OnSerialPortDataListener {
     @SuppressLint("SetTextI18n")
     @Override
     public void onDataReceived(byte[] bytes) {
+        Log.e("TAG", "===================onDataReceived");
+        Log.e("TAG", bytes != null ? bytes.toString() : "bytes为空");
         if (bytes != null) {
             String s = bytesToHex(bytes);
             Log.e("TAG", "接收: " + s);
@@ -63,6 +68,7 @@ public class ThermometerRecord implements OnSerialPortDataListener {
 //                    }
 //                });
             }
+            Log.e("TAG", "bytesToHex(bytes)" + s);
             if (s.startsWith("FFFFFE23") && s.endsWith("FEFFFF")) {
                 String bodyT = s.substring(8, 12);
                 String bodyOutT = s.substring(12, 16);

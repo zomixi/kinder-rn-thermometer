@@ -3,6 +3,7 @@ package com.kinder.thermometer;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.Callback;
 
 public class ThermometryModule extends ReactContextBaseJavaModule {
 
@@ -23,20 +24,20 @@ public class ThermometryModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public boolean start() {
+    public boolean start(Callback callback) {
         if (mThermometerRecord == null) {
             mThermometerRecord = new ThermometerRecord(mReactContext);
         }
-        return (mThermometerRecord.start());
+        callback(null, mThermometerRecord.start());
     }
 
     @ReactMethod
-    public double readTemperature() {
-        return mThermometerRecord.getBodyTemperature();
+    public double readTemperature(Callback callback) {
+        callback(null, mThermometerRecord.getBodyTemperature());
     }
 
     @ReactMethod
-    public boolean stop() {
-        return (mThermometerRecord.stop());
+    public boolean stop(Callback callback) {
+        callback(null, mThermometerRecord.stop());
     }
 }

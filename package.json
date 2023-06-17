@@ -1,11 +1,17 @@
 {
   "name": "kinder-rn-thermometer",
-  "version": "1.0.0",
+  "version": "1.0.12",
   "description": "Kinder测温",
   "main": "index.js",
   "scripts": {
     "test": "echo 1"
   },
+  "files": [
+    "index.js",
+    "package.json",
+    "android",
+    "README.md"
+  ],
   "keywords": [
     "wechat",
     "react",
