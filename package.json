@@ -1,6 +1,6 @@
 {
   "name": "kinder-rn-thermometer",
-  "version": "1.0.12",
+  "version": "1.0.14",
   "description": "Kinder测温",
   "main": "index.js",
   "scripts": {

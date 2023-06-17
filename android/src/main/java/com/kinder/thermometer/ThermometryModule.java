@@ -24,20 +24,20 @@ public class ThermometryModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public boolean start(Callback callback) {
+    public void start(Callback callback) {
         if (mThermometerRecord == null) {
             mThermometerRecord = new ThermometerRecord(mReactContext);
         }
-        callback(null, mThermometerRecord.start());
+        callback.invoke(null, mThermometerRecord.start());
     }
 
     @ReactMethod
-    public double readTemperature(Callback callback) {
-        callback(null, mThermometerRecord.getBodyTemperature());
+    public void readTemperature(Callback callback) {
+        callback.invoke(null, mThermometerRecord.getBodyTemperature());
     }
 
     @ReactMethod
-    public boolean stop(Callback callback) {
-        callback(null, mThermometerRecord.stop());
+    public void stop(Callback callback) {
+        callback.invoke(null, mThermometerRecord.stop());
     }
 }
