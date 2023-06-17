@@ -31,9 +31,6 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
     double[] doubles = new double[5];
     ThermometryManager mThermometryManager = null;
 
-    private Button startBtn;
-    boolean isRun = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,35 +38,13 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
         ctrl = new HcPowerCtrl();
         tv_t = findViewById(R.id.tv_t);
 
-        startBtn = (Button) findViewById(R.id.start_btn);
-
-        startBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isRun) {
-                    isRun = false;
-                    startBtn.setText("测温");
-                    try {
-                        serialPortManager.closeSerialPort();
-                    } catch (Exception e) {
-                    }
-                } else {
-                    startBtn.setText("暂停");
-                    try {
-                        openTemperatureYY();
-                    } catch (Exception e) {
-                    }
-                }
-            }
-        });
-
         ctrl.identityPower(1);
 
         tts = new TextToSpeech(this, this);
 //        new InitTask().execute();
     }
 //    FFFFFFFF 68EC C102 001D 316D C0 08 000A 0000 01 14 00005D10 0000000000000003800101522D37DA
-                                                         //标签ID
+    //标签ID
 //    private void open24G() {
 //        if (serialPortManager == null) {
 //            serialPortManager = new SerialPortManager();
@@ -130,10 +105,9 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
         if (serialPortManager == null) {
             serialPortManager = new SerialPortManager();
         }
-        isRun = serialPortManager.openSerialPort(new File("/dev/ttysWK0"), 9600);
+        boolean b = serialPortManager.openSerialPort(new File("/dev/ttysWK0"), 9600);
 
-        Log.e("TAG", "测温打开: " + isRun);
-
+        Log.e("TAG", "测温打开: " + b);
         serialPortManager.setOnSerialPortDataListener(new OnSerialPortDataListener() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -346,12 +320,15 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
         return sb.toString();
     }
 
+
+    boolean stop = true;
+
     @Override
     protected void onPause() {
         super.onPause();
 //        ctrl = new HcPowerCtrl();
 //        ctrl.identityCtrl(0);
-        isRun = false;
+        stop = false;
         Log.e("TAG", "onPause: "  );
         serialPortManager.closeSerialPort();
     }
